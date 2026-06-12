@@ -1,56 +1,53 @@
+@use '../styles/variables' as v;
+@use '../styles/mixins' as m;
+
 .card {
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-md);
+  @include m.card-base;
   padding: 1.25rem 1.5rem;
-  background: #fff;
-  box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   transition: box-shadow 0.2s, transform 0.2s;
-}
 
-.card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
+  &:hover {
+    box-shadow: v.$shadow-md;
+    transform: translateY(-1px);
+  }
 }
 
 .title {
   font-size: 1.05rem;
-  color: var(--gray-900);
+  color: v.$gray-900;
   font-weight: 600;
 }
 
 .summary {
-  color: var(--gray-500);
+  color: v.$gray-500;
   line-height: 1.6;
   font-size: 0.93rem;
 }
 
 .footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include m.flex-between;
   margin-top: 0.5rem;
 }
 
 .meta {
-  color: var(--gray-400);
+  color: v.$gray-400;
   font-size: 0.82rem;
 }
 
 .readBtn {
   padding: 0.4rem 1.1rem;
-  background: var(--blue-800);
+  background: v.$blue-800;
   color: #fff;
   border: none;
-  border-radius: var(--radius-sm);
+  border-radius: v.$radius-sm;
   cursor: pointer;
   font-size: 0.875rem;
   font-weight: 500;
+  font-family: inherit;
   transition: background 0.15s;
-}
 
-.readBtn:hover {
-  background: var(--blue-700);
+  &:hover { background: v.$blue-700; }
 }

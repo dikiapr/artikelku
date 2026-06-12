@@ -1,0 +1,39 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: v.$gray-700;
+}
+
+.input {
+  @include m.input-base;
+
+  &.hasError {
+    border-color: v.$red-600;
+    &:focus { box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12); }
+  }
+}
+
+.textarea {
+  @include m.input-base;
+  resize: vertical;
+
+  &.hasError {
+    border-color: v.$red-600;
+    &:focus { box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12); }
+  }
+}
+
+.error {
+  font-size: 0.8rem;
+  color: v.$red-600;
+  margin: 0;
+}

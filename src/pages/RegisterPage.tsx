@@ -1,7 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import s from './auth.module.css';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Card from '../components/ui/Card';
+import s from './auth.module.scss';
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -33,51 +36,42 @@ export default function RegisterPage() {
 
   return (
     <div className={s.container}>
-      <div className={s.card}>
+      <Card style={{ maxWidth: '400px' }}>
         <h1 className={s.heading}>Daftar Akun Baru</h1>
         <form className={s.form} onSubmit={handleSubmit}>
-          <div className={s.field}>
-            <label className={s.label}>Username</label>
-            <input
-              className={s.input}
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              placeholder="nama_pengguna"
-            />
-          </div>
-          <div className={s.field}>
-            <label className={s.label}>Email</label>
-            <input
-              className={s.input}
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="contoh@email.com"
-            />
-          </div>
-          <div className={s.field}>
-            <label className={s.label}>Password</label>
-            <input
-              className={s.input}
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••••"
-            />
-          </div>
-          {error && <p className={s.error}>{error}</p>}
-          <button className={s.submitBtn} type="submit" disabled={loading}>
-            {loading ? 'Memproses...' : 'Daftar'}
-          </button>
+          <Input
+            label="Username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            placeholder="nama_pengguna"
+          />
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="contoh@email.com"
+          />
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="••••••••"
+          />
+          {error && <p className={s.formError}>{error}</p>}
+          <Button type="submit" loading={loading} style={{ width: '100%' }}>
+            Daftar
+          </Button>
         </form>
         <p className={s.footer}>
           Sudah punya akun? <Link to="/login">Masuk di sini</Link>
         </p>
-      </div>
+      </Card>
     </div>
   );
 }

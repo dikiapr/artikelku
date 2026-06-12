@@ -1,3 +1,5 @@
+@use '../styles/variables' as v;
+
 .heading {
   font-size: 1.5rem;
   font-weight: 700;
@@ -5,7 +7,7 @@
 }
 
 .empty {
-  color: var(--gray-500);
+  color: v.$gray-500;
 }
 
 .list {

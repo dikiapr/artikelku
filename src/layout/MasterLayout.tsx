@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import s from './MasterLayout.module.css';
+import s from './MasterLayout.module.scss';
 
 export default function MasterLayout() {
   return (

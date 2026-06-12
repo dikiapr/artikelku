@@ -1,13 +1,14 @@
+@use '../styles/variables' as v;
+@use '../styles/mixins' as m;
+
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include m.flex-between;
   padding: 0 1.5rem;
   height: 56px;
-  background: var(--blue-800);
+  background: v.$blue-800;
   color: #fff;
   flex-shrink: 0;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 .brand {
@@ -25,39 +26,38 @@
 }
 
 .greeting {
-  color: var(--blue-200);
+  color: v.$blue-200;
   font-size: 0.875rem;
-}
 
-.greeting strong {
-  color: #fff;
+  strong { color: #fff; }
 }
 
 .logoutBtn {
   background: transparent;
-  border: 1px solid var(--blue-200);
+  border: 1px solid v.$blue-200;
   color: #fff;
-  border-radius: var(--radius-sm);
+  border-radius: v.$radius-sm;
   padding: 0.3rem 0.8rem;
   cursor: pointer;
   font-size: 0.875rem;
+  font-family: inherit;
   transition: background 0.15s, border-color 0.15s;
-}
 
-.logoutBtn:hover {
-  background: rgba(255,255,255,0.12);
-  border-color: #fff;
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: #fff;
+  }
 }
 
 .loginLink {
   color: #fff;
   font-size: 0.9rem;
   padding: 0.3rem 0.8rem;
-  border-radius: var(--radius-sm);
+  border-radius: v.$radius-sm;
   transition: background 0.15s;
-}
 
-.loginLink:hover {
-  background: rgba(255,255,255,0.12);
-  text-decoration: none;
+  &:hover {
+    background: rgba(255, 255, 255, 0.12);
+    text-decoration: none;
+  }
 }

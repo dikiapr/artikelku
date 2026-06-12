@@ -1,0 +1,5 @@
+// Returns rem spacing in multiples of 0.25rem
+// Usage: spacing(4) → 1rem, spacing(2) → 0.5rem
+@function spacing($n) {
+  @return #{$n * 0.25}rem;
+}

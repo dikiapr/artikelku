@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import type { Article } from '../types';
-import s from './ArticleCard.module.css';
+import s from './ArticleCard.module.scss';
 
 interface Props {
   article: Article;
@@ -10,9 +10,7 @@ export default function ArticleCard({ article }: Props) {
   const navigate = useNavigate();
 
   const tanggal = new Date(article.createdAt).toLocaleDateString('id-ID', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
+    day: 'numeric', month: 'long', year: 'numeric',
   });
 
   return (

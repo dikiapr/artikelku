@@ -1,0 +1,39 @@
+@use '../styles/variables' as v;
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  border-right: 1px solid v.$gray-200;
+  padding: 1rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #fff;
+}
+
+.link {
+  display: block;
+  padding: 0.55rem 0.9rem;
+  border-radius: v.$radius-sm;
+  color: v.$gray-700;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+
+  &:hover {
+    background: v.$gray-100;
+    color: v.$gray-900;
+    text-decoration: none;
+  }
+}
+
+.active {
+  background: v.$blue-100;
+  color: v.$blue-800;
+
+  &:hover {
+    background: v.$blue-100;
+    color: v.$blue-700;
+  }
+}

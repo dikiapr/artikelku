@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Article } from '../types';
 import { getArticles } from '../services/articleService';
 import ArticleCard from '../components/ArticleCard';
-import s from './HomePage.module.css';
+import s from './HomePage.module.scss';
 
 export default function HomePage() {
   const [articles] = useState<Article[]>(getArticles);

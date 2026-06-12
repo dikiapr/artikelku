@@ -1,0 +1,35 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.btn {
+  @include m.button-base(v.$blue-800);
+
+  &.primary {
+    background: v.$blue-800;
+    color: #fff;
+    &:hover:not(:disabled) { background: v.$blue-700; }
+  }
+
+  &.secondary {
+    background: v.$gray-100;
+    color: v.$gray-700;
+    border: 1px solid v.$gray-300;
+    &:hover:not(:disabled) { background: v.$gray-200; }
+  }
+
+  &.danger {
+    background: v.$red-600;
+    color: #fff;
+    &:hover:not(:disabled) { background: #b91c1c; }
+  }
+
+  &.md {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  &.sm {
+    padding: 0.35rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}

@@ -2,7 +2,10 @@ import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { addArticle } from '../services/articleService';
-import s from './WriteArticlePage.module.css';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Textarea from '../components/ui/Textarea';
+import s from './WriteArticlePage.module.scss';
 
 export default function WriteArticlePage() {
   const { currentUser } = useAuth();
@@ -30,46 +33,33 @@ export default function WriteArticlePage() {
     <div className={s.wrapper}>
       <h1 className={s.heading}>Tulis Artikel</h1>
       <form className={s.form} onSubmit={handleSubmit}>
-        <div className={s.field}>
-          <label className={s.label}>Judul</label>
-          <input
-            className={s.input}
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            placeholder="Judul artikel..."
-          />
-        </div>
-        <div className={s.field}>
-          <label className={s.label}>Ringkasan</label>
-          <textarea
-            className={s.textarea}
-            value={summary}
-            onChange={(e) => setSummary(e.target.value)}
-            required
-            rows={3}
-            placeholder="Ringkasan singkat yang tampil di halaman utama..."
-          />
-        </div>
-        <div className={s.field}>
-          <label className={s.label}>Isi Artikel</label>
-          <textarea
-            className={s.textarea}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-            rows={12}
-            placeholder="Tulis isi artikel selengkap-lengkapnya di sini..."
-          />
-        </div>
+        <Input
+          label="Judul"
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+          placeholder="Judul artikel..."
+        />
+        <Textarea
+          label="Ringkasan"
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          required
+          rows={3}
+          placeholder="Ringkasan singkat yang tampil di halaman utama..."
+        />
+        <Textarea
+          label="Isi Artikel"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+          rows={12}
+          placeholder="Tulis isi artikel selengkap-lengkapnya di sini..."
+        />
         <div className={s.actions}>
-          <button className={s.submitBtn} type="submit" disabled={loading}>
-            {loading ? 'Menyimpan...' : 'Terbitkan Artikel'}
-          </button>
-          <button className={s.cancelBtn} type="button" onClick={() => navigate(-1)}>
-            Batal
-          </button>
+          <Button type="submit" loading={loading}>Terbitkan Artikel</Button>
+          <Button type="button" variant="secondary" onClick={() => navigate(-1)}>Batal</Button>
         </div>
       </form>
     </div>

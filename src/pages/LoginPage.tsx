@@ -1,7 +1,10 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import s from './auth.module.css';
+import Button from '../components/ui/Button';
+import Input from '../components/ui/Input';
+import Card from '../components/ui/Card';
+import s from './auth.module.scss';
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -30,40 +33,34 @@ export default function LoginPage() {
 
   return (
     <div className={s.container}>
-      <div className={s.card}>
+      <Card style={{ maxWidth: '400px' }}>
         <h1 className={s.heading}>Masuk ke ArtikelKu</h1>
         <form className={s.form} onSubmit={handleSubmit}>
-          <div className={s.field}>
-            <label className={s.label}>Email</label>
-            <input
-              className={s.input}
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              placeholder="contoh@email.com"
-            />
-          </div>
-          <div className={s.field}>
-            <label className={s.label}>Password</label>
-            <input
-              className={s.input}
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              placeholder="••••••••"
-            />
-          </div>
-          {error && <p className={s.error}>{error}</p>}
-          <button className={s.submitBtn} type="submit" disabled={loading}>
-            {loading ? 'Memproses...' : 'Masuk'}
-          </button>
+          <Input
+            label="Email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder="contoh@email.com"
+          />
+          <Input
+            label="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="••••••••"
+          />
+          {error && <p className={s.formError}>{error}</p>}
+          <Button type="submit" loading={loading} style={{ width: '100%' }}>
+            Masuk
+          </Button>
         </form>
         <p className={s.footer}>
           Belum punya akun? <Link to="/register">Daftar di sini</Link>
         </p>
-      </div>
+      </Card>
     </div>
   );
 }

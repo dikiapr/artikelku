@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getArticleById } from '../services/articleService';
-import s from './ArticleDetailPage.module.css';
+import s from './ArticleDetailPage.module.scss';
 
 export default function ArticleDetailPage() {
   const { id } = useParams<{ id: string }>();
