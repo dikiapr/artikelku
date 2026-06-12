@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Article } from '../types';
 import { getArticles } from '../services/articleService';
 import ArticleCard from '../components/ArticleCard';
 import s from './HomePage.module.css';
 
 export default function HomePage() {
-  const [articles, setArticles] = useState<Article[]>([]);
-
-  useEffect(() => {
-    setArticles(getArticles());
-  }, []);
+  const [articles] = useState<Article[]>(getArticles);
 
   return (
     <div>

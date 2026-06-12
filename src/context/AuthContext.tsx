@@ -1,15 +1,7 @@
-import { createContext, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import type { User } from '../types';
 import * as authService from '../services/authService';
-
-interface AuthContextValue {
-  currentUser: User | null;
-  login: (email: string, password: string) => void;
-  logout: () => void;
-  register: (data: { username: string; email: string; password: string }) => void;
-}
-
-export const AuthContext = createContext<AuthContextValue | null>(null);
+import { AuthContext } from './auth-context';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState<User | null>(authService.getCurrentUser);

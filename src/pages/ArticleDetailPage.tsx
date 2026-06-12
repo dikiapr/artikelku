@@ -1,19 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import type { Article } from '../types';
 import { getArticleById } from '../services/articleService';
 import s from './ArticleDetailPage.module.css';
 
 export default function ArticleDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const [article, setArticle] = useState<Article | null | undefined>(undefined);
-
-  useEffect(() => {
-    if (id) setArticle(getArticleById(id) ?? null);
-  }, [id]);
-
-  if (article === undefined) return null;
+  const article = useMemo(() => (id ? getArticleById(id) ?? null : null), [id]);
 
   if (article === null) {
     return (
