@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Article } from '../types';
 import { getArticles } from '../services/articleService';
 import ArticleCard from '../components/ArticleCard';
+import s from './HomePage.module.css';
 
 export default function HomePage() {
   const [articles, setArticles] = useState<Article[]>([]);
@@ -12,11 +13,11 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 style={{ marginTop: 0, marginBottom: '1.25rem', color: '#111827' }}>Daftar Artikel</h1>
+      <h1 className={s.heading}>Daftar Artikel</h1>
       {articles.length === 0 && (
-        <p style={{ color: '#6b7280' }}>Belum ada artikel. Tulis artikel pertamamu!</p>
+        <p className={s.empty}>Belum ada artikel. Tulis artikel pertamamu!</p>
       )}
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div className={s.list}>
         {articles.map((article) => (
           <ArticleCard key={article.id} article={article} />
         ))}

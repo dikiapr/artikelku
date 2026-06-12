@@ -1,14 +1,15 @@
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Sidebar from './Sidebar';
+import s from './MasterLayout.module.css';
 
 export default function MasterLayout() {
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div className={s.wrapper}>
       <Header />
-      <div style={{ display: 'flex', flex: 1, overflow: 'hidden' }}>
+      <div className={s.body}>
         <Sidebar />
-        <main style={{ flex: 1, padding: '1.5rem', overflowY: 'auto' }}>
+        <main className={s.content}>
           <Outlet />
         </main>
       </div>
