@@ -19,17 +19,17 @@ export default function ArticleDetailPage() {
 
   if (article === null) {
     return (
-      <main style={{ padding: '1rem' }}>
+      <div>
         <p>Artikel tidak ditemukan.</p>
         <button onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
           Kembali
         </button>
-      </main>
+      </div>
     );
   }
 
   return (
-    <main style={{ padding: '1rem', maxWidth: '720px' }}>
+    <div style={{ maxWidth: '720px' }}>
       <button onClick={() => navigate(-1)} style={{ cursor: 'pointer', marginBottom: '1rem' }}>
         &larr; Kembali
       </button>
@@ -39,6 +39,6 @@ export default function ArticleDetailPage() {
       </small>
       <hr />
       <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.7' }}>{article.content}</div>
-    </main>
+    </div>
   );
 }

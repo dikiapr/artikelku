@@ -12,7 +12,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main style={{ padding: '1rem' }}>
+    <div>
       <h1>Daftar Artikel</h1>
       {articles.length === 0 && <p>Belum ada artikel.</p>}
       <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -33,6 +33,6 @@ export default function HomePage() {
           </li>
         ))}
       </ul>
-    </main>
+    </div>
   );
 }
