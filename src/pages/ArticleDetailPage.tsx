@@ -10,8 +10,7 @@ export default function ArticleDetailPage() {
 
   useEffect(() => {
     if (id) {
-      const found = getArticleById(id);
-      setArticle(found ?? null);
+      setArticle(getArticleById(id) ?? null);
     }
   }, [id]);
 
@@ -20,25 +19,53 @@ export default function ArticleDetailPage() {
   if (article === null) {
     return (
       <div>
-        <p>Artikel tidak ditemukan.</p>
-        <button onClick={() => navigate(-1)} style={{ cursor: 'pointer' }}>
-          Kembali
+        <p style={{ color: '#6b7280' }}>Artikel tidak ditemukan.</p>
+        <button onClick={() => navigate(-1)} style={btnStyle}>
+          &larr; Kembali
         </button>
       </div>
     );
   }
 
+  const tanggal = new Date(article.createdAt).toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
   return (
     <div style={{ maxWidth: '720px' }}>
-      <button onClick={() => navigate(-1)} style={{ cursor: 'pointer', marginBottom: '1rem' }}>
+      <button onClick={() => navigate(-1)} style={{ ...btnStyle, marginBottom: '1.5rem' }}>
         &larr; Kembali
       </button>
-      <h1>{article.title}</h1>
-      <small style={{ color: '#888' }}>
-        Oleh {article.authorName} · {new Date(article.createdAt).toLocaleDateString('id-ID')}
+
+      <h1 style={{ margin: '0 0 0.5rem', color: '#111827', lineHeight: 1.3 }}>
+        {article.title}
+      </h1>
+
+      <p style={{ margin: '0 0 0.25rem', color: '#4b5563', fontStyle: 'italic' }}>
+        {article.summary}
+      </p>
+
+      <small style={{ color: '#9ca3af' }}>
+        Ditulis oleh <strong>{article.authorName}</strong> · {tanggal}
       </small>
-      <hr />
-      <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.7' }}>{article.content}</div>
+
+      <hr style={{ margin: '1.25rem 0', borderColor: '#e5e7eb' }} />
+
+      <div style={{ whiteSpace: 'pre-wrap', lineHeight: '1.8', color: '#1f2937' }}>
+        {article.content}
+      </div>
     </div>
   );
 }
+
+const btnStyle: React.CSSProperties = {
+  padding: '0.4rem 0.9rem',
+  background: '#f3f4f6',
+  border: '1px solid #d1d5db',
+  borderRadius: '6px',
+  cursor: 'pointer',
+  fontSize: '0.875rem',
+  color: '#374151',
+};
