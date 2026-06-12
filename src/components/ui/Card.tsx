@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import s from './Card.module.scss';
 
-interface Props extends HTMLAttributes<HTMLDivElement> {}
+type Props = HTMLAttributes<HTMLDivElement>;
 
 export default function Card({ children, className, ...rest }: Props) {
   return (
