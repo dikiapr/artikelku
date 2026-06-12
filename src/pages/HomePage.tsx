@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import type { Article } from '../types';
-import { getArticles } from '../services/articleService';
+import { useAppSelector } from '../store/hooks';
 import ArticleCard from '../components/ArticleCard';
 import s from './HomePage.module.scss';
 
 export default function HomePage() {
-  const [articles] = useState<Article[]>(getArticles);
+  const articles = useAppSelector((s) => s.articles.items);
 
   return (
     <div>

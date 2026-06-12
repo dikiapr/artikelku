@@ -1,14 +1,16 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
-import { addArticle } from '../services/articleService';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { addArticle } from '../store/slices/articlesSlice';
+import * as articleService from '../services/articleService';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Textarea from '../components/ui/Textarea';
 import s from './WriteArticlePage.module.scss';
 
 export default function WriteArticlePage() {
-  const { currentUser } = useAuth();
+  const dispatch = useAppDispatch();
+  const currentUser = useAppSelector((s) => s.auth.currentUser);
   const navigate = useNavigate();
 
   const [title, setTitle] = useState('');
@@ -20,12 +22,13 @@ export default function WriteArticlePage() {
     e.preventDefault();
     if (!currentUser) return;
     setLoading(true);
-    addArticle({
+    const newArticle = articleService.addArticle({
       title: title.trim(),
       summary: summary.trim(),
       content: content.trim(),
       authorName: currentUser.username,
     });
+    dispatch(addArticle(newArticle));
     navigate('/');
   }
 

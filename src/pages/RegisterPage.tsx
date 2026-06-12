@@ -1,13 +1,15 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAppDispatch } from '../store/hooks';
+import { loginSuccess } from '../store/slices/authSlice';
+import * as authService from '../services/authService';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Card from '../components/ui/Card';
 import s from './auth.module.scss';
 
 export default function RegisterPage() {
-  const { register } = useAuth();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [username, setUsername] = useState('');
@@ -25,7 +27,9 @@ export default function RegisterPage() {
     }
     setLoading(true);
     try {
-      register({ username: username.trim(), email: email.trim(), password });
+      authService.register({ username: username.trim(), email: email.trim(), password });
+      const loggedIn = authService.login(email.trim(), password);
+      dispatch(loginSuccess(loggedIn));
       navigate('/', { replace: true });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Gagal mendaftar.');

@@ -1,12 +1,13 @@
-import { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getArticleById } from '../services/articleService';
+import { useAppSelector } from '../store/hooks';
 import s from './ArticleDetailPage.module.scss';
 
 export default function ArticleDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const article = useMemo(() => (id ? getArticleById(id) ?? null : null), [id]);
+  const article = useAppSelector((s) =>
+    id ? (s.articles.items.find((a) => a.id === id) ?? null) : null,
+  );
 
   if (article === null) {
     return (

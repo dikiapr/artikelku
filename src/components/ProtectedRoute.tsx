@@ -1,8 +1,8 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAppSelector } from '../store/hooks';
 
 export default function ProtectedRoute() {
-  const { currentUser } = useAuth();
+  const currentUser = useAppSelector((s) => s.auth.currentUser);
   const location = useLocation();
 
   if (!currentUser) {

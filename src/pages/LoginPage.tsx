@@ -1,31 +1,29 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { loginThunk } from '../store/slices/authSlice';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import Card from '../components/ui/Card';
 import s from './auth.module.scss';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const dispatch = useAppDispatch();
+  const authError = useAppSelector((s) => s.auth.error);
   const navigate = useNavigate();
   const location = useLocation();
   const from = (location.state as { from?: string })?.from ?? '/';
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setError('');
     setLoading(true);
     try {
-      login(email, password);
+      await dispatch(loginThunk({ email, password })).unwrap();
       navigate(from, { replace: true });
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Gagal login.');
     } finally {
       setLoading(false);
     }
@@ -52,7 +50,7 @@ export default function LoginPage() {
             required
             placeholder="••••••••"
           />
-          {error && <p className={s.formError}>{error}</p>}
+          {authError && <p className={s.formError}>{authError}</p>}
           <Button type="submit" loading={loading} style={{ width: '100%' }}>
             Masuk
           </Button>
